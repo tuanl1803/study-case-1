@@ -1,16 +1,17 @@
 package com.mitrais.studycase1.atm.view;
 
-import com.studycase1.atmsilmulation.model.Account;
-import com.studycase1.atmsilmulation.services.WithdrawServices;
-import com.studycase1.atmsilmulation.services.WithdrawServicesImpl;
+import com.mitrais.studycase1.atm.model.Account;
+import com.mitrais.studycase1.atm.service.WithdrawServices;
+import com.mitrais.studycase1.atm.service.WithdrawServicesImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class WithdrawScreen {
 	public static String withdrawAmount;
 
-	public void show() {
+	public void show(List<Account> accounts) {
 
 		System.out.println();
 		System.out.println("Withdraw Screen");
@@ -23,34 +24,30 @@ public class WithdrawScreen {
 
 		Scanner scan = new Scanner(System.in);
 		String opt = scan.nextLine();
-		List<Account> users = Account.getInstance();
 		SummaryScreen summaryScreen = new SummaryScreen();
 		TransactionScreen transactionScreen = new TransactionScreen();
 		OtherWithdrawScreen otherWithdrawScreen = new OtherWithdrawScreen();
+		WelcomeScreen welcomeScreen = new WelcomeScreen();
 		WithdrawServices withdrawServices = new WithdrawServicesImpl();
-		
+
 		switch (opt) {
-		case "1":
-			withdrawServices.caculateWithdrawAmount(users, WelcomeScreen.accNumberStatic, WelcomeScreen.pinStatic, summaryScreen, transactionScreen, 10);
-			break;
-		case "2":
-			withdrawServices.caculateWithdrawAmount(users, WelcomeScreen.accNumberStatic, WelcomeScreen.pinStatic, summaryScreen, transactionScreen, 50);
-			break;
-		case "3":
-			withdrawServices.caculateWithdrawAmount(users, WelcomeScreen.accNumberStatic, WelcomeScreen.pinStatic, summaryScreen, transactionScreen, 100);
-			break;
-		case "4":
-			otherWithdrawScreen.show();
-			break;
-		case "5":
-			transactionScreen.show();
-			break;
-		case "":
-			transactionScreen.show();
-			break;
-		default:
-			transactionScreen.show();
-			break;
+			case "1":
+				withdrawServices.caculateWithdrawAmount(accounts, welcomeScreen.accountNumber, WelcomeScreen.pin, summaryScreen, transactionScreen, 10);
+				break;
+			case "2":
+				withdrawServices.caculateWithdrawAmount(accounts, WelcomeScreen.accountNumber, WelcomeScreen.pin, summaryScreen, transactionScreen, 50);
+				break;
+			case "3":
+				withdrawServices.caculateWithdrawAmount(accounts, WelcomeScreen.accountNumber, WelcomeScreen.pin, summaryScreen, transactionScreen, 100);
+				break;
+			case "4":
+				otherWithdrawScreen.show(accounts);
+				break;
+			case "5":
+			case "":
+			default:
+				transactionScreen.show(accounts);
+				break;
 		}
 	}
 }

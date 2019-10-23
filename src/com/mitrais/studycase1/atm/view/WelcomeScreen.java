@@ -1,22 +1,22 @@
 package com.mitrais.studycase1.atm.view;
 
-import com.studycase1.atmsilmulation.model.Account;
-import com.studycase1.atmsilmulation.services.UserService;
-import com.studycase1.atmsilmulation.services.UserServicesImpl;
+
+import com.mitrais.studycase1.atm.model.Account;
+import com.mitrais.studycase1.atm.service.AccountServices;
+import com.mitrais.studycase1.atm.service.AccountServicesImpl;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class WelcomeScreen {
 
-	public static String accNumberStatic;
-	public static String pinStatic;
 	public static int balance;
+	public static String accountNumber;
+	public static String pin;
 
-	public void show() {
+	public void show(List<Account> accounts) {
 
-		UserService userService = new UserServicesImpl();
-		List<Account> users = Account.getInstance();
+		AccountServices userService = new AccountServicesImpl();
 		WelcomeScreen welcomeScreen = new WelcomeScreen();
 		Scanner scan = new Scanner(System.in);
 
@@ -25,20 +25,18 @@ public class WelcomeScreen {
 		System.out.println("---------------");
 
 		System.out.print("Enter Account Number: ");
-		
-		String accountNumber = scan.nextLine();
-		String acc = accountNumber;
-		accNumberStatic = acc;
 
-		userService.validateAccountNumber(accNumberStatic, users, welcomeScreen);
+		accountNumber = scan.nextLine();
+
+
+		userService.validateAccountNumber(accountNumber, accounts, welcomeScreen);
 
 		System.out.print("Enter PIN: ");
-		String pin = scan.nextLine();
-		pinStatic = pin;
-		
-		userService.validatePinNumber(pinStatic, users, welcomeScreen);
+		pin = scan.nextLine();
 
-		userService.validate(users, accNumberStatic, pinStatic);
+		userService.validatePinNumber(pin, accounts, welcomeScreen);
+
+		userService.validate(accounts, accountNumber, pin);
 
 	}
 

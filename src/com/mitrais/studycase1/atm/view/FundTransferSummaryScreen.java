@@ -1,13 +1,16 @@
 package com.mitrais.studycase1.atm.view;
 
-import com.studycase1.atmsilmulation.services.FundTransferServices;
-import com.studycase1.atmsilmulation.services.FundTransferServicesImpl;
 
+import com.mitrais.studycase1.atm.model.Account;
+import com.mitrais.studycase1.atm.service.FundTransferServices;
+import com.mitrais.studycase1.atm.service.FundTransferServicesImpl;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class FundTransferSummaryScreen {
 
-	public void show() {
+	public void show(List<Account> accounts) {
 		WelcomeScreen welcomeScreen = new WelcomeScreen();
 		FundTransferServices fundTransferServices = new FundTransferServicesImpl();
 		TransactionScreen transactionScreen = new TransactionScreen();
@@ -31,13 +34,11 @@ public class FundTransferSummaryScreen {
 			fundTransferServices.transaction(transactionScreen);
 			break;
 		case "2":
-			welcomeScreen.show();
-			break;
 		case "":
-			welcomeScreen.show();
+			welcomeScreen.show(accounts);
 			break;
 		default:
-			show();
+			show(accounts);
 			break;
 		}
 	}

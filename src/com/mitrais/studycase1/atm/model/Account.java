@@ -1,5 +1,7 @@
 package com.mitrais.studycase1.atm.model;
 
+import java.util.List;
+
 public class Account {
     private String Name;
     private String PIN;
@@ -48,4 +50,5 @@ public class Account {
         Balance = balance;
         this.accountNumber = accountNumber;
     }
+
 }
