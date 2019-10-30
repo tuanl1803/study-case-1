@@ -5,12 +5,11 @@ import com.mitrais.studycase1.atm.model.Account;
 import com.mitrais.studycase1.atm.service.WithdrawServices;
 import com.mitrais.studycase1.atm.service.WithdrawServicesImpl;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class OtherWithdrawScreen {
 
-    public void show(List<Account> accounts) {
+    public void show(Account account) {
         SummaryScreen summaryScreen = new SummaryScreen();
         WithdrawScreen withdrawScreen = new WithdrawScreen();
         WithdrawServices withdrawServices = new WithdrawServicesImpl();
@@ -20,8 +19,12 @@ public class OtherWithdrawScreen {
         System.out.println("--------------------");
         System.out.print("Enter amount to withdraw: ");
         Scanner scan = new Scanner(System.in);
-        String amount = scan.nextLine();
+        try {
+            int amount = scan.nextInt();
+            withdrawServices.validateAndCalculateWithdrawAmount(account, withdrawScreen, summaryScreen, amount);
+        } catch (Exception e){
+            System.out.println("Only Number Allowed");
+        }
 
-        withdrawServices.validateAndCalculateWithdrawAmount(amount, accounts, withdrawScreen, summaryScreen);
     }
 }

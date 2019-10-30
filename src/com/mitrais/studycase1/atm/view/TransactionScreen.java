@@ -7,14 +7,14 @@ import java.util.Scanner;
 
 public class TransactionScreen {
 
-    public void show(List<Account> accounts) {
+    public void show(Account account) {
 
         WithdrawScreen withdrawScreen = new WithdrawScreen();
         WelcomeScreen welcomeScreen = new WelcomeScreen();
         FundTransferScreen1 fundTransferScreen = new FundTransferScreen1();
 
         System.out.println();
-        System.out.println("Transaction Screen");
+        System.out.println("Transfer Screen");
         System.out.println("----------------");
 
         System.out.println("1. Withdraw ");
@@ -27,17 +27,17 @@ public class TransactionScreen {
         switch (opt) {
 
             case "1":
-                withdrawScreen.show(accounts);
+                withdrawScreen.show(account);
                 break;
             case "2":
-                fundTransferScreen.show(accounts);
+                fundTransferScreen.show(account);
                 break;
             case "3":
             case "":
-                welcomeScreen.show(accounts);
+                welcomeScreen.show();
                 break;
             default:
-                show(accounts);
+                show(account);
                 break;
         }
 

@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class SummaryScreen {
 
-    public void show(List<Account> accounts) {
+    public void show(Account account , int amount) {
 
         TransactionScreen ts = new TransactionScreen();
         WelcomeScreen ws = new WelcomeScreen();
@@ -24,19 +24,19 @@ public class SummaryScreen {
         System.out.println("Summary Screen");
         System.out.println("----------------");
         System.out.println("Date : " + dtf.format(now));
-        System.out.println("Withdraw: " + WithdrawScreen.withdrawAmount);
-        System.out.println("Balance: $" + ws.balance);
+        System.out.println("Withdraw: $" + amount);
+        System.out.println("Balance: $" + account.getBalance());
 
-        System.out.println("1. Transaction");
+        System.out.println("1. Transfer");
         System.out.println("2. Exit");
 
         int opt = scan.nextInt();
         switch (opt) {
             case 1:
-                ts.show(accounts);
+                ts.show(account);
                 break;
             case 2:
-                ws.show(accounts);
+                ws.show();
                 break;
             default:
                 System.out.println("default");

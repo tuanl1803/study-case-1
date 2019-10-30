@@ -4,14 +4,10 @@ import com.mitrais.studycase1.atm.model.Account;
 import com.mitrais.studycase1.atm.service.WithdrawServices;
 import com.mitrais.studycase1.atm.service.WithdrawServicesImpl;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class WithdrawScreen {
-	public static String withdrawAmount;
-
-	public void show(List<Account> accounts) {
+	public void show(Account account) {
 
 		System.out.println();
 		System.out.println("Withdraw Screen");
@@ -27,26 +23,25 @@ public class WithdrawScreen {
 		SummaryScreen summaryScreen = new SummaryScreen();
 		TransactionScreen transactionScreen = new TransactionScreen();
 		OtherWithdrawScreen otherWithdrawScreen = new OtherWithdrawScreen();
-		WelcomeScreen welcomeScreen = new WelcomeScreen();
 		WithdrawServices withdrawServices = new WithdrawServicesImpl();
 
 		switch (opt) {
 			case "1":
-				withdrawServices.caculateWithdrawAmount(accounts, welcomeScreen.accountNumber, WelcomeScreen.pin, summaryScreen, transactionScreen, 10);
+				withdrawServices.caculateWithdrawAmount(account, summaryScreen, transactionScreen, 10);
 				break;
 			case "2":
-				withdrawServices.caculateWithdrawAmount(accounts, WelcomeScreen.accountNumber, WelcomeScreen.pin, summaryScreen, transactionScreen, 50);
+				withdrawServices.caculateWithdrawAmount(account, summaryScreen, transactionScreen, 50);
 				break;
 			case "3":
-				withdrawServices.caculateWithdrawAmount(accounts, WelcomeScreen.accountNumber, WelcomeScreen.pin, summaryScreen, transactionScreen, 100);
+				withdrawServices.caculateWithdrawAmount(account, summaryScreen, transactionScreen, 100);
 				break;
 			case "4":
-				otherWithdrawScreen.show(accounts);
+				otherWithdrawScreen.show(account);
 				break;
 			case "5":
 			case "":
 			default:
-				transactionScreen.show(accounts);
+				transactionScreen.show(account);
 				break;
 		}
 	}
